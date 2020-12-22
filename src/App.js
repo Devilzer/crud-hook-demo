@@ -4,9 +4,8 @@ import './App.css';
 // task component
 function Todo({todo,index, completeTodo}){
   return(
-    <div className="todo">
+    <div className="todo" style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
       {todo.text}
-      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
       <div>
         <button onClick={() => completeTodo(index)}>Complete</button>
       </div>
@@ -61,7 +60,12 @@ function App() {
 
   const completeTodo = index => {
     const newTodos = [...todos];
-    newTodos[index].isCompleted = true;
+    if(newTodos[index].isCompleted===true){
+      newTodos[index].isCompleted = false;
+    }
+    else{
+      newTodos[index].isCompleted = true;
+    }
     setTodos(newTodos);
   };
 
@@ -73,6 +77,7 @@ function App() {
             <Todo key={index}
               index={index}
               todo={todo}
+              completeTodo={completeTodo}
             />
             
           ))
